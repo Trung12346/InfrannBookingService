@@ -1,8 +1,8 @@
-package demo.demo.Config;
+package demo.demo.config;
 
-import demo.demo.Service.CustomerOauth2UserService;
-import demo.demo.Service.OauthSuccessHandler;
-import demo.demo.Service.UsersDetailsService;
+import demo.demo.service.CustomerOAuth2UserService;
+import demo.demo.service.OauthSuccessHandler;
+import demo.demo.service.UsersDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,16 +10,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
-import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestCustomizers;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -38,7 +35,7 @@ public class SecurityConfig {
     private OauthSuccessHandler oauthSuccessHandler;
 
     @Autowired
-    CustomerOauth2UserService customerOauth2UserService;
+    CustomerOAuth2UserService customerOauth2UserService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{

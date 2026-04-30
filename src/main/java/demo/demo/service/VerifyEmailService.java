@@ -1,18 +1,17 @@
-package demo.demo.Service;
+package demo.demo.service;
 
-import demo.demo.Entity.Users;
-import demo.demo.Entity.Verification_token;
-import demo.demo.Repository.UserRepository;
-import demo.demo.Repository.Verification_TokenRepository;
+import demo.demo.entity.Users;
+import demo.demo.entity.VerificationToken;
+import demo.demo.repository.UserRepository;
+import demo.demo.repository.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class VerifyEmailService {
 
     @Autowired
-    Verification_TokenRepository verificationToken;
+    VerificationTokenRepository verificationToken;
 
     @Autowired
     UserRepository userRepository;
@@ -24,7 +23,7 @@ public class VerifyEmailService {
         if(verificationToken.findByToken(token).isExpired()){
             return "this token is Already Expire";
         }
-        Verification_token vt = verificationToken.findByToken(token);
+        VerificationToken vt = verificationToken.findByToken(token);
         Users users = vt.getUsers();
         users.setEnabled(true);
         users.setRole(0);

@@ -1,11 +1,9 @@
-package demo.demo.Entity;
+package demo.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -34,5 +32,5 @@ public class Users {
 
     @OneToOne(mappedBy = "users",cascade = CascadeType.ALL)
     @JsonIgnore
-    private Verification_token verificationToken;
+    private VerificationToken verificationToken;
 }

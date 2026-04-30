@@ -1,15 +1,10 @@
-package demo.demo.Controller;
+package demo.demo.controller;
 
-import demo.demo.Entity.Users;
-import demo.demo.Repository.UserRepository;
-import demo.demo.Service.LoginService;
+import demo.demo.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/Login")
 @Controller

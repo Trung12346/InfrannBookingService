@@ -1,6 +1,6 @@
-package demo.demo.Entity;
+package demo.demo.entity;
 
-import demo.demo.EnumRole.Role;
+import demo.demo.enumRole.Role;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

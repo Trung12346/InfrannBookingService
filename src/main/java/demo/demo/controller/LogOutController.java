@@ -1,4 +1,4 @@
-package demo.demo.Controller;
+package demo.demo.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;

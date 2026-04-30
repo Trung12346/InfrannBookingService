@@ -1,34 +1,22 @@
-package demo.demo.Service;
+package demo.demo.service;
 
-import demo.demo.Entity.Users;
-import demo.demo.EnumRole.Role;
-import demo.demo.Repository.UserRepository;
+import demo.demo.entity.Users;
+import demo.demo.enumRole.Role;
+import demo.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.OAuth2Error;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
-import java.util.Collection;
 import java.util.*;
-import java.util.Map;
+
 @Service
-public class CustomerOauth2UserService extends OidcUserService {
+public class CustomerOAuth2UserService extends OidcUserService {
 
     @Autowired
     UserRepository userRepository;

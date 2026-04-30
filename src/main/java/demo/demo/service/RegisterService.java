@@ -1,9 +1,9 @@
-package demo.demo.Service;
+package demo.demo.service;
 
-import demo.demo.Entity.Users;
-import demo.demo.Entity.Verification_token;
-import demo.demo.Repository.UserRepository;
-import demo.demo.Repository.Verification_TokenRepository;
+import demo.demo.entity.Users;
+import demo.demo.entity.VerificationToken;
+import demo.demo.repository.UserRepository;
+import demo.demo.repository.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class RegisterService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    Verification_TokenRepository verificationTokenRepository;;
+    VerificationTokenRepository verificationTokenRepository;;
 
     public String register(Users users,String cf_password){
         if(userRepository.existsByEmail(users.getEmail())){
@@ -38,7 +38,7 @@ public class RegisterService {
 
         String token = UUID.randomUUID().toString();
 
-        verificationTokenRepository.save(new Verification_token(token,users));
+        verificationTokenRepository.save(new VerificationToken(token,users));
 
         emailService.EmailSendVerification(users,token);
         System.out.println("check out email");

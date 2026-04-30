@@ -1,14 +1,11 @@
-package demo.demo.Controller;
+package demo.demo.controller;
 
-import demo.demo.Service.UsersDetailsService;
+import demo.demo.service.UsersDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AdminController {

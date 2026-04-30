@@ -1,6 +1,6 @@
-package demo.demo.Controller;
+package demo.demo.controller;
 
-import demo.demo.Service.VerifyEmailService;
+import demo.demo.service.VerifyEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

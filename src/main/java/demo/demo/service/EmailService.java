@@ -1,7 +1,6 @@
-package demo.demo.Service;
+package demo.demo.service;
 
-import demo.demo.Entity.Users;
-import demo.demo.Entity.Verification_token;
+import demo.demo.entity.Users;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +19,7 @@ public class EmailService {
         String VerifyLink = baseUrl + "/verify-email?token="+token;
 
         SimpleMailMessage ms = new SimpleMailMessage();
-        ms.setTo("This is You Email Verification");
+        ms.setTo("This is Your Email Verification");
         ms.setTo(users.getEmail());
         ms.setSubject("Authentication Account");
         ms.setText(users.getEmail()+ "Click this link to verify your mail: " + VerifyLink);

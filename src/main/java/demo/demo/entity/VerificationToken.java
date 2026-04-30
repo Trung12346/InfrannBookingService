@@ -1,4 +1,4 @@
-package demo.demo.Entity;
+package demo.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Verification_token {
+public class VerificationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -32,7 +32,7 @@ public class Verification_token {
     @JsonIgnore
     private Users users;
 
-    public Verification_token(String token,Users users){
+    public VerificationToken(String token, Users users){
         this.token = token;
         this.users = users;
         this.expiry_date = LocalDateTime.now().plusMinutes(11);

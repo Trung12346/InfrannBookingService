@@ -1,6 +1,4 @@
-package demo.demo.EnumRole;
-
-import demo.demo.Entity.Users;
+package demo.demo.enumRole;
 
 public enum Role {
     NONE(0),

@@ -1,8 +1,8 @@
-package demo.demo.Controller;
+package demo.demo.controller;
 
-import demo.demo.Entity.Users;
-import demo.demo.Service.EmailService;
-import demo.demo.Service.RegisterService;
+import demo.demo.entity.Users;
+import demo.demo.service.EmailService;
+import demo.demo.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
-package demo.demo.Service;
+package demo.demo.service;
 
-import demo.demo.Entity.Users;
-import demo.demo.Repository.UserRepository;
+import demo.demo.entity.Users;
+import demo.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

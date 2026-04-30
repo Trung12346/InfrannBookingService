@@ -1,8 +1,8 @@
-package demo.demo.Service;
+package demo.demo.service;
 
-import demo.demo.Entity.UserDetail;
-import demo.demo.Entity.Users;
-import demo.demo.Repository.UserRepository;
+import demo.demo.entity.UserDetail;
+import demo.demo.entity.Users;
+import demo.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
