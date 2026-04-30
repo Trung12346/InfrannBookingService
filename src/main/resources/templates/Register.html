@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="@{/register}" th:object="${item}">
+    <label>Set Our UserName</label><br>
+    <input type="text" th:field="*{username}"><br>
+    <label>Set out Password</label><br>
+    <input type="text" th:field="*{password_hash}"><br>
+    <label>Confirm Password</label><br>
+    <input type="text" name="cf_password"><br>
+    <label>Verify Email</label><br>
+    <input type="text" th:field="*{email}"><br>
+    <input type="submit" value="Register">
+</form>
+</body>
+</html>

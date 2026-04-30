@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="@{/Login}">
+  <label>User Name</label><br>
+  <input type="text" name="username"><br>
+    <p th:text="${ValidateText}"></p>
+  <label>Password</label><br>
+  <input type="text" name="password"><br>
+    <p th:if="${param.error}">Username hoac mat khau khong dung</p>
+  <input type="submit" value="Login">
+</form>
+<a th:href="@{/register}">Register</a>
+<a th:href="@{/oauth2/authorization/google}">Login with Google</a>
+<p th:if="${param.error== 'oauth2'}">email khong ton tai</p>
+<p th:if="${param.error== 'disabled'}">tai khoan chua duoc xac minh</p>
+
+</body>
+</html>

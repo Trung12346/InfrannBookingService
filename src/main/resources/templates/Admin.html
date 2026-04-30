@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${User}"></p>
+Hello Admin
+<button th:href="@{/Logout}" onclick="logout()">Logout</button>
+</body>
+<script>
+
+function logout(){
+    let res = confirm("Are u sure to logout")
+    if(res){
+        window.location.href = "http://localhost:8080/Logout"
+    }
+    return false;
+}
+</script>
+</html>
