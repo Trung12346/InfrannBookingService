@@ -47,24 +47,24 @@ public class SecurityConfig {
 
 
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/register", "/Login", "/error", "/verify-email",
-                                "/home", "/Login/oauth2/code/google", "/password-reset/email", "/password-reset/password", "/password-reset").permitAll()
-                        .requestMatchers("/Admin").hasRole("ADMIN")
+                        .requestMatchers("/register", "/login", "/error", "/verify-email",
+                                "/home", "/login/oauth2/code/google", "/password-reset/email", "/password-reset/password", "/password-reset").permitAll()
+                        .requestMatchers("/admin").hasRole("ADMIN")
                         // t cấu hình phân quyền rồi nếu muốn phân quyền chỉ cần gọi cái
                         // requestMatchers xong gọi hàm hasRole(Tên Quyền) là xong tên quyền là String
                         .anyRequest().authenticated())
 
 
-                .formLogin(login -> login.loginPage("/Login")
+                .formLogin(login -> login.loginPage("/login")
                         .defaultSuccessUrl("/home", true)
-                        .failureUrl("/Login?error=true").permitAll())
+                        .failureUrl("/login?error=true").permitAll())
 
 
                 .logout(logout -> logout.disable())
 
 
                 .oauth2Login(customizer -> customizer
-                        .loginPage("/Login").userInfoEndpoint(oauth -> oauth
+                        .loginPage("/login").userInfoEndpoint(oauth -> oauth
                                 .oidcUserService(customerOauth2UserService)) // đoạn này là lúc chọn tài khoản google sẽ authen xem tài khoản có tồn tại không xong trả về token cho Spring xử lý
                         // nói ngắn gọn là bình thường cái oidcUserService sẽ là Spring tự cấu hình default thì khi mình đưa
                         //method mình từ cấu hình vào thì Spring sẽ dùng hàm cusomter0authUserService kia để duyệt data từ google trả về
@@ -76,7 +76,7 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(
-                                SessionCreationPolicy.IF_REQUIRED).invalidSessionUrl("/Login"))
+                                SessionCreationPolicy.IF_REQUIRED).invalidSessionUrl("/login"))
                 .build();
     }
 

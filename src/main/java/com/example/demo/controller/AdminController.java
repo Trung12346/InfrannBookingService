@@ -16,7 +16,7 @@ public class AdminController {
 
 
 
-    @GetMapping("/Admin")
+    @GetMapping("/admin")
     public String Admin(Model model, Authentication authentication){
 
         model.addAttribute("User",authentication.getName());
