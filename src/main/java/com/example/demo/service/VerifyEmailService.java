@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.enumRole.Role;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.VerificationTokenRepository;
 import com.example.demo.model.Users;
@@ -27,7 +28,7 @@ public class VerifyEmailService {
 
         Users users = verificationToken.getUsers();
         users.setEnabled(true);
-        users.setRole(0);
+        users.setRole(Role.GUEST.getValue());
         userRepository.save(users);
         verificationToken.setUsed(true);
         verificationTokenRepository.save(verificationToken);
