@@ -20,18 +20,23 @@ public class AdminController {
     UserRepository userRepository;
 
 
-    @GetMapping("/admin")
-    public String Admin(Model model, Authentication authentication){
-        if(authentication.getPrincipal() instanceof OidcUser){
-            OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
-            String email = oidcUser.getAttribute("email");
-            Users user = userRepository.findByEmail(email);
+    @GetMapping("/Admin")
+    public String Admin(Model model, Authentication authentication) throws ServletException, IOException {
+            Users user = null; 
+            if(authentication instanceof OAuth2AuthenticationToken){
+                OAuth2AuthenticationToken oauth2token = (OAuth2AuthenticationToken) authentication;
+                OAuth2User oAuth2User = oauth2token.getPrincipal();
+                String email = oAuth2User.getAttribute("email");
+                user = userRepository.findByEmail(email);
+            }else if(authentication instanceof UsernamePasswordAuthenticationToken){
+                String username = authentication.getName();
+                user = userRepository.findByUsername(username);
+            }
+            if(user == null){
+                return "redirect:/Login?error=true";
+            }
             model.addAttribute("User",user.getUsername());
             model.addAttribute("id",user.getId());
-        }else{
-            model.addAttribute("User",authentication.getName());
-            model.addAttribute("id",userRepository.findByUsername(authentication.getName()).getId());
-        }
         return "admin";
     }
 }
