@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Users;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UsersDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,8 @@ public class AdminController {
     @Autowired
     UsersDetailsService usersDetailsService;
 
+    @Autowired
+    UserRepository userRepository;
 
 
     @GetMapping("/admin")
