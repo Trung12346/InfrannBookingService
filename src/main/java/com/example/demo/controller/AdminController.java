@@ -17,8 +17,8 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String Admin(Model model, Authentication authentication){
-        if(authentication.getPrincipal() instanceof OidcUser oidcUser){
-
+        if(authentication.getPrincipal() instanceof OidcUser){
+            OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
             String email = oidcUser.getAttribute("email");
             Users user = userRepository.findByEmail(email);
             model.addAttribute("User",user.getUsername());
