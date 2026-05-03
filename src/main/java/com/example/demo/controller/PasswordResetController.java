@@ -62,7 +62,7 @@ public class PasswordResetController {
         if (verifyEmailService.tokenIsValid(token)) {
             VerificationToken verificationToken = verificationTokenRepository.findByToken(token);
             System.out.println("changing password");
-            userService.changePassword(verificationToken.getUsers(), password, passwordConfirm);
+            userService.changePassword(verificationToken.getUser(), password, passwordConfirm);
             System.out.println("putting token to unusable");
             verifyEmailService.deprecateToken(verificationToken);
 

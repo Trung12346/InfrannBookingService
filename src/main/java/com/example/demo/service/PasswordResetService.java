@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import com.example.demo.model.VerificationToken;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.VerificationTokenRepository;
@@ -25,9 +25,9 @@ public class PasswordResetService {
         }
         try {
             String token = UUID.randomUUID().toString();
-            Users users = userRepository.findByEmail(email);
-            verificationTokenRepository.save(new VerificationToken(token, users));
-            emailService.EmailSendVerification(users, token, EmailService.PASSWORD_RESET);
+            User user = userRepository.findByEmail(email);
+            verificationTokenRepository.save(new VerificationToken(token, user));
+            emailService.EmailSendVerification(user, token, EmailService.PASSWORD_RESET);
         } catch (Exception e) {
             System.out.println(e);
             return false;

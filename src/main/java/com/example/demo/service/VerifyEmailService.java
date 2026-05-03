@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.enumRole.Role;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.VerificationTokenRepository;
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import com.example.demo.model.VerificationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +26,10 @@ public class VerifyEmailService {
             return "this token is Already Expire";
         }
 
-        Users users = verificationToken.getUsers();
-        users.setEnabled(true);
-        users.setRole(Role.GUEST.getValue());
-        userRepository.save(users);
+        User user = verificationToken.getUser();
+        user.setEnabled(true);
+        user.setRole(Role.GUEST.getValue());
+        userRepository.save(user);
         verificationToken.setUsed(true);
         verificationTokenRepository.save(verificationToken);
         return "redirect:/Login";

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Table(name = "users")
 @Getter
 @Setter
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,6 +26,9 @@ public class Users {
 
     @Column(name = "isenabled")
     private boolean enabled = false;
+
+    @Column(name = "deleted", insertable = false)
+    private boolean deleted;
 
     @Column(name = "role")
     private Integer role;

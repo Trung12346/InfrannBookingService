@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ public class EmailService {
 
     public static final int PASSWORD_RESET = 0, ACCOUNT_VERIFY = 1;
 
-    public void EmailSendVerification(Users users, String token, int mode){
+    public void EmailSendVerification(User user, String token, int mode){
         String VerifyLink = "";
         if (mode == 0) {
             VerifyLink = baseUrl + "/password-reset/password?token=" + token;
@@ -26,9 +26,9 @@ public class EmailService {
         }
         SimpleMailMessage ms = new SimpleMailMessage();
         ms.setTo("This is Your Email Verification");
-        ms.setTo(users.getEmail());
+        ms.setTo(user.getEmail());
         ms.setSubject("Authentication Account");
-        ms.setText(users.getEmail()+ "Click this link to verify your mail: <a href=\"" + VerifyLink + "\"></a><br><button onclick=\"window.location.href='" + VerifyLink + "'\"></button>");
+        ms.setText(user.getEmail()+ "Click this link to verify your mail: <a href=\"" + VerifyLink + "\"></a><br><button onclick=\"window.location.href='" + VerifyLink + "'\"></button>");
         mailSender.send(ms);
 
     }

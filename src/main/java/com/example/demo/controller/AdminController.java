@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UsersDetailsService;
 import jakarta.servlet.ServletException;
@@ -27,7 +27,7 @@ public class AdminController {
 
     @GetMapping("/Admin")
     public String Admin(Model model, Authentication authentication) throws ServletException, IOException {
-            Users user = null; 
+            User user = null;
             if(authentication instanceof OAuth2AuthenticationToken){
                 OAuth2AuthenticationToken oauth2token = (OAuth2AuthenticationToken) authentication;
                 OAuth2User oAuth2User = oauth2token.getPrincipal();
@@ -38,7 +38,7 @@ public class AdminController {
                 user = userRepository.findByUsername(username);
             }
             if(user == null){
-                return "redirect:/Login?error=true";
+                return "redirect:/login?error=true";
             }
             model.addAttribute("User",user.getUsername());
             model.addAttribute("id",user.getId());

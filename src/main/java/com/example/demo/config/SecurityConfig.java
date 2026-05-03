@@ -6,6 +6,7 @@ import com.example.demo.service.UsersDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -48,10 +49,12 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/register", "/login", "/error", "/verify-email",
-                                "/home", "/login/oauth2/code/google", "/password-reset/email", "/password-reset/password", "/password-reset").permitAll()
+                                "/home", "/login/oauth2/code/google", "/password-reset/email", "/password-reset/password", "/password-reset", "/users/*/verification/id").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         // t cấu hình phân quyền rồi nếu muốn phân quyền chỉ cần gọi cái
                         // requestMatchers xong gọi hàm hasRole(Tên Quyền) là xong tên quyền là String
+                        //.requestMatchers(HttpMethod.POST, "/users/*/verification/id").hasRole("BUSINESS")
+
                         .anyRequest().authenticated())
 
 

@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.repository.UserRepository;
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,7 +26,7 @@ public class OauthSuccessHandler implements AuthenticationSuccessHandler {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute("email");
 
-        Users user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
         if(user==null){
             response.sendRedirect("/Login?error=oauth2");
             return;

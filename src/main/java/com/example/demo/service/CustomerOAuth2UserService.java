@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.enumRole.Role;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,13 +26,13 @@ public class CustomerOAuth2UserService extends OidcUserService {
        OidcUser oidcUser = super.loadUser(userRequest);
         String email = oidcUser.getAttribute("email");
 
-        Users users = userRepository.findByEmail(email);
-        if(users == null){
+        User user = userRepository.findByEmail(email);
+        if(user == null){
             throw new OAuth2AuthenticationException("User not found with that email");
         }
         List<GrantedAuthority> listRole = new ArrayList<>(oidcUser.getAuthorities());
         for(Role r: Role.values()){
-            if((users.getRole() & r.getValue()) !=0){
+            if((user.getRole() & r.getValue()) !=0){
                 listRole.add(new SimpleGrantedAuthority("ROLE_"+r.name()));
 
             }

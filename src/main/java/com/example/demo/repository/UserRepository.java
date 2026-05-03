@@ -1,15 +1,23 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<Users,Integer> {
+import java.util.List;
 
-    public Users findByUsername(String name);
+@Repository
+public interface UserRepository extends JpaRepository<User,Integer> {
+
+    public User findByUsername(String name);
 
     public boolean existsByEmail(String email);
 
-    public Users findByEmail(String email);
+    public User findByEmail(String email);
+
+    @Query(nativeQuery = true, value = """
+        SELECT * FROM users WHERE (role & 2) != 0
+    """)
+    public List<User> findAllEmployees();
 }

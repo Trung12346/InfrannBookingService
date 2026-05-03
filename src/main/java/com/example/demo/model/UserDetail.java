@@ -11,17 +11,21 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserDetail implements UserDetails {
-    private Users users;
+    private User user;
 
-    public UserDetail(Users users){
-        this.users = users;
+    public User getUser() {
+        return user;
+    }
+
+    public UserDetail(User user){
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         for(Role r : Role.values()){
-            if((users.getRole() & r.getValue()) !=0){
+            if((user.getRole() & r.getValue()) !=0){
                 authorityList.add(new SimpleGrantedAuthority("ROLE_"+r.name()));
             }
         }
@@ -30,12 +34,12 @@ public class UserDetail implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return users.getPassword_hash();
+        return user.getPassword_hash();
     }
 
     @Override
     public String getUsername() {
-        return users.getUsername();
+        return user.getUsername();
     }
 
     @Override

@@ -4,7 +4,7 @@ public enum Role {
     NONE(0),
     GUEST(1),
     EMPLOYEE(2),
-    BUSSINESS(4),
+    BUSINESS(4),
     ADMIN(8);
 
     private final int value;

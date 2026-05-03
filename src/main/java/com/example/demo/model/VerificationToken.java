@@ -30,11 +30,11 @@ public class VerificationToken {
     @ManyToOne
     @JoinColumn(name = "users_id",referencedColumnName = "id")
     @JsonIgnore
-    private Users users;
+    private User user;
 
-    public VerificationToken(String token, Users users){
+    public VerificationToken(String token, User user){
         this.token = token;
-        this.users = users;
+        this.user = user;
         this.expiry_date = LocalDateTime.now().plusMinutes(11);
     }
     public boolean isExpired(){

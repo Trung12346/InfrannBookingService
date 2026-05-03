@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import com.example.demo.service.EmailService;
 import com.example.demo.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ public class RegisterController {
 
     @GetMapping("")
     public String Register(Model model){
-        model.addAttribute("item",new Users());
+        model.addAttribute("item",new User());
         return "register";
     }
 
     @PostMapping("")
-    public String register(@ModelAttribute("item")Users item,
+    public String register(@ModelAttribute("item") User item,
                            @RequestParam("cf_password") String cf_password){
         registerService.register(item,cf_password);
         return "redirect:/login";

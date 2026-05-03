@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.repository.UserRepository;
-import com.example.demo.model.Users;
+import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,16 +18,16 @@ public class LoginService {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    public Users FindByName(String name){
+    public User FindByName(String name){
         return userRepository.findByUsername(name);
     }
 
     public boolean login(String username, String password) throws Exception {
-        Users users = userRepository.findByUsername(username);
-        if(users == null){
+        User user = userRepository.findByUsername(username);
+        if(user == null){
             throw new UsernameNotFoundException("Username not found exception");
         }
-        if(!users.isEnabled()){
+        if(!user.isEnabled()){
             throw new Exception("User is not enabled");
         }
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
