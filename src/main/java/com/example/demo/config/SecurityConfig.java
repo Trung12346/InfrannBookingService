@@ -3,6 +3,7 @@ package com.example.demo.config;
 import com.example.demo.service.CustomerOAuth2UserService;
 import com.example.demo.service.OauthSuccessHandler;
 import com.example.demo.service.UsersDetailsService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,8 @@ public class SecurityConfig {
     @Autowired
     CustomerOAuth2UserService customerOauth2UserService;
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -49,8 +52,8 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/register", "/login", "/error", "/verify-email",
-                                "/home", "/login/oauth2/code/google", "/password-reset/email", "/password-reset/password", "/password-reset", "/users/*/verification/id").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                                "/home", "/login/oauth2/code/google", "/password-reset/email", "/password-reset/password", "/password-reset").permitAll().requestMatchers("/ManagerListings").hasRole("EMPLOYEE")
+                        .requestMatchers("/Admin","/ManagerListings").hasRole("ADMIN")
                         // t cấu hình phân quyền rồi nếu muốn phân quyền chỉ cần gọi cái
                         // requestMatchers xong gọi hàm hasRole(Tên Quyền) là xong tên quyền là String
                         //.requestMatchers(HttpMethod.POST, "/users/*/verification/id").hasRole("BUSINESS")

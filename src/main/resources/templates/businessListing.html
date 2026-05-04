@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title> Title </title>
+</head>
+<body>
+<form action="/businessListings/createRoom" method="post" th:object="${DTOtranfer}">
+
+    <h3>Thông tin phòng</h3>
+
+    <p>
+        <input type="hidden"  th:field="*{listings.id}">
+    </p>
+
+    Title
+    <p>
+        <input type="text" name="listing.title" th:field="*{listings.title}" placeholder="ten phong">
+    </p>
+
+    Description
+    <p>
+        <input type="text" name="listing.description" th:field="*{listings.description}" placeholder="mo ta">
+    </p>
+
+    Price
+    <p>
+        <input type="number" step="any" name="listing.price" th:field="*{listings.price}" placeholder="gia phong">
+    </p>
+
+    Capacity
+    <p>
+        <input type="number" name="listing.capacity" th:field="*{listings.capacity}" placeholder="so luong nguoi o toi da">
+    </p>
+
+    Loại phòng:
+    <p>
+        <select th:field="*{listings.roomtype}">
+            <option value="1">phòng 1 giường</option>
+            <option value="2">phòng 2 giường</option>
+            <option value="3">phòng 3 giường</option>
+            <option value="4">phòng 4 giường</option>
+        </select>
+    </p>
+
+    Trạng thái:
+    <p>
+        <select th:field="*{listings.status}">
+            <option value="1">còn trống</option>
+            <option value="2">đã có người cọc</option>
+            <option value="3">đã đủ người</option>
+        </select>
+    </p>
+
+   địa chỉ  <p>
+        <input type="text" th:field="*{listings.address}">
+    </p>
+    <h3>Thêm hình ảnh bên dưới</h3>
+
+    <p>
+        <input type="hidden"  th:field="*{media.id}">
+    </p>
+
+    <p>
+        <input type="text"  th:field="*{media.media}" placeholder="tên ">
+    </p>
+
+    <p>
+        <input type="hidden"  th:field="*{media.fileType}">
+    </p>
+
+    <p>
+        <input type="text"  th:field="*{media.url}" placeholder="đường dẫn liên kết">
+    </p>
+
+    <p>
+        <div th:switch="*{media.status}">
+        <span th:case="0" th:text="'xác nhận thành công'"></span>
+        <span th:case="1" th:text="'xác nhận thất bại'"></span>
+        <span th:case="2" th:text="'đã lưu trữ (vui lòng đợi xác nhận)'"></span>
+</div>
+    </p>
+
+    <p>
+        <input type="hidden" th:field="*{media.permission}">
+    </p>
+    <button type="submit">Submit</button>
+
+</form>
+
+<table border="2">
+    <th>STT</th>
+    <th>phòng</th>
+    <th>tên phòng</th>
+    <th>mô tả</th>
+    <th>giá thuê </th>
+    <th>số lượng người tối đa</th>
+    <th>trạng thái</th>
+    <th>địa chỉ</th>
+    <th>action</th>
+    <tr th:each=" l,iterStat : ${list}" >
+        <td th:text="${iterStat.count}"></td>
+        <td><img th:src="${l.m.url}" style="width: 200px; height: 200px; object-fit: cover;"></td>
+        <td th:text="${l.l.title}"></td>
+        <td th:text="${l.l.description}"></td>
+        <td th:text="${l.l.price}"></td>
+        <td th:text="${l.l.capacity}"></td>
+        <td th:switch="${l.l.status}">
+            <span th:case="1">còn trống</span>
+            <span th:case="2">đã có người cọc</span>
+            <span th:case="3">đã đủ người</span>
+            <span th:case="*">không xác định</span>
+        </td>
+        <td th:text="${l.l.address}"></td>
+        <td><a th:href="@{/businessListings/updateRoom(id = ${l.id})}">
+            <button>update</button>
+        </a>
+            <a th:href="@{/businessListings/deleteRoom(id = ${l.id})}">
+                <button>delete</button>
+            </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

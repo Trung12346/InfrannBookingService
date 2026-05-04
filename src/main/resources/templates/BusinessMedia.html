@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<form action="/businessMedia/saveMedia" method="post" th:object="${Media}" >
+
+    tên ảnh:<p><input type="text" th:field="*{media}" placeholder="tên ảnh"></p>
+
+    <p><input type="text" th:if="*{fileType != null}" th:field="*{fileType}" placeholder="kiểu ảnh"></p>
+
+
+    <p><input type="text" th:field="*{url}" placeholder="url"></p>
+
+    trạng thái:<p><div th:switch="*{status}">
+       <span th:case="0" th:text="'xác nhận thành công'"></span>
+       <span th:case="1" th:text="'xác nhận thất bại'"></span>
+       <span th:case="2" th:text="'gửi ảnh thành công(vui lòng đợi xác nhận)'"></span>
+</div></p>
+
+    <button>submit</button>
+</form>
+<table border="2">
+    <thead>
+    <th>STT</th>
+    <th>hình ảnh</th>
+    <th>tên ảnh</th>
+    <th>thuộc sở hữu</th>
+    <th>kiểu dữ liệu của ảnh</th>
+    <th>trạng thái</th>
+    <th>quyền hạn truy cập hình ảnh</th>
+    <th>action</th>
+    </thead>
+    <tr th:each="l,iterStat : ${list}">
+        <td th:text="${iterStat.count}"></td>
+        <td ><img th:src="${l.url}" style="height: 100px;width: 100px"></td>
+        <td th:text="${l.media}"></td>
+        <td th:text="${l.u.id}"></td>
+        <td th:text="${l.fileType}"></td>
+        <td th:text="${l.status}"></td>
+        <td th:text="${l.permission}"></td>
+        <td><a th:href="@{/businessMedia/updateMedia(id=${l.id})}"><button>update</button></a>
+            <a th:href="@{/businessMediaa(id=${l.id})}"><button>delete</button></a>
+        </td>
+    </tr>
+</table>
+<p><a th:href="@{/businessMedia/Home(page = ${currentPages - 1})}">
+    <button>previous</button>
+</a>
+
+<div th:each="i : ${#numbers.sequence(0,totalPages - 1)}">
+    <a th:href="@{/businessMedia/Home(page = ${i})}" th:text="${i}"></a>
+</div>
+
+<a th:href="@{/businessMedia/Home(page = ${currentPages + 1})}">
+    <button>next</button></a></p>
+</body>
+</html>

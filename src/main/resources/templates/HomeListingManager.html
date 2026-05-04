@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/ManagerListings/home}" th:text="'back to home'"></a>
+<form action="/ManagerListings/filterRoom" method="get">
+    <p>search tên: <input type="text" th:name="title" th:value="${title}"> hoặc tìm kiếm theo danh mục tên:
+        <select th:name="danhmuc">
+            <option th:each="l : ${listfilter}" th:value="${l.title}" th:text="${l.title}" ></option></select>
+        <button>submit</button></p>
+</form>
+
+<form action="/ManagerListings/createRoom" method="post" th:object="${listings}">
+    <p><input type="hidden" th:field="*{id}"></p>
+    title<p><input type="text" th:field="*{title}"></p>
+    owner:<p><select th:field="*{u}">
+    <option th:if="${l.role == 8}" th:each="l : ${listuser}"  th:value="${l.id}" th:text="${l.username}"></option>
+</select></p>
+    description  <p><input type="text" th:field="*{description}"></p>
+    price <p><input type="number" step="any" th:field="*{price}"></p>
+    capacity <p><input type="number" th:field="*{capacity}"></p>
+    căn hộ <p><input type="radio" th:value="1" th:field="*{roomtype}"></p>
+    phòng phổ thông 2 giường<p><input type="radio" th:value="2" th:field="*{roomtype}"></p>
+    phòng thiết kế  <p><input type="radio" th:value="3" th:field="*{roomtype}"></p>
+    phòng 4 người <p><input type="radio" th:value="4" th:field="*{roomtype}"></p>
+    còn trống: <p><input type="radio" value="1" th:field="*{status}"></p>
+    đã có người cọc: <p><input type="radio" value="2" th:field="*{status}"></p>
+    đủ người: <p><input type="radio" value="3" th:field="*{status}"></p>
+    địa chỉ <p><input type="text" th:field="*{address}"></p>
+    <button>submit</button>
+</form>
+<table border="2">
+    <thead>
+    <th>STT</th>
+    <th>id</th>
+    <th>chủ khách sạn</th>
+    <th>tên khách sạn</th>
+    <th>mô tả </th>
+    <th>giá</th>
+    <th>số lượng mức chứa</th>
+    <th>loại phòng</th>
+    <th>trạng thái</th>
+    <th>địa chỉ</th>
+    <th>thời gian tạo</th>
+    <th>action</th>
+    </thead>
+    <tr th:each=" l,iterStat : ${list}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${l.id}"></td>
+        <td th:text="${l.u.username}"></td>
+        <td th:text="${l.title}"></td>
+        <td th:text="${l.description}"></td>
+        <td th:text="${l.price}"></td>
+        <td th:text="${l.capacity}"></td>
+        <td th:text="${l.roomtype}"></td>
+        <td th:text="${l.status}"></td>
+        <td th:text="${l.address}"></td>
+        <td th:text="${l.createAt}"></td>
+        <td><a th:href="@{/ManagerListings/updateRoom(id=${l.id},currentPages=${currentPages})}">
+            <button>update</button></a>
+        </td>
+    </tr>
+</table>
+<div th:if="${idForUpdate == null}">
+    <a th:if="${currentPages > 0}"
+       th:href="@{/ManagerListings/home(page=${currentPages - 1})}">
+        <button>previous</button>
+    </a>
+
+    <span th:if="${totalPages > 0}"
+          th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:href="@{/ManagerListings/home(page=${i})}"
+           th:text="${i + 1}">
+        </a>
+    </span>
+
+    <a th:if="${currentPages <= totalPages - 1}"
+       th:href="@{/ManagerListings/home(page=${currentPages + 1})}">
+        <button>next</button>
+    </a>
+    <p><span th:text="'bạn đang ở trang '+${currentPages+1}+'trên'+${totalPages}"></span></p>
+</div>
+
+
+<div th:if="${idForUpdate != null}">
+    <a th:if="${currentPages > 0}"
+       th:href="@{/ManagerListings/updateRoom(id=${idForUpdate}, page=${currentPages - 1})}">
+        <button>previous</button>
+    </a>
+
+    <span th:if="${totalPages > 0}"
+          th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:href="@{/ManagerListings/updateRoom(id=${idForUpdate}, page=${i})}"
+           th:text="${i + 1}">
+        </a>
+    </span>
+
+    <a th:if="${currentPages <= totalPages - 1}"
+       th:href="@{/ManagerListings/updateRoom(id=${idForUpdate}, page=${currentPages + 1})}">
+        <button>next</button>
+    </a>
+    <p><span th:text="'bạn đang ở trang '+${currentPages+1}+'trên'+${totalPages}"></span></p>
+
+</div>
+</body>
+</html>
