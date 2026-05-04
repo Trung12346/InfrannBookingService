@@ -10,7 +10,7 @@
     <h3>Thông tin phòng</h3>
 
     <p>
-        <input type="hidden" name="listing.id" th:field="*{listings.id}">
+        <input type="hidden"  th:field="*{listings.id}">
     </p>
 
     Title
@@ -52,6 +52,9 @@
         </select>
     </p>
 
+   địa chỉ  <p>
+        <input type="text" th:field="*{listings.address}">
+    </p>
     <h3>Thêm hình ảnh bên dưới</h3>
 
     <p>
@@ -59,33 +62,33 @@
     </p>
 
     <p>
-        <input type="text"  th:value="${media.media}" placeholder="ten anh">
+        <input type="text"  th:field="*{media.media}" placeholder="tên ">
     </p>
 
     <p>
-        <input type="hidden"  th:value="${media.fileType}">
+        <input type="hidden"  th:field="*{media.fileType}">
     </p>
 
     <p>
-        <input type="text"  th:value="${media.url}" placeholder="đường dẫn liên kết">
+        <input type="text"  th:field="*{media.url}" placeholder="đường dẫn liên kết">
     </p>
 
     <p>
-        <select th:field="*{media.status}">
-            <option value="1">đang chờ xác nhận</option>
-            <option value="2">xác nhận thành công</option>
-            <option value="3">xác nhận thất bại</option>
-        </select>
+        <div th:switch="*{media.status}">
+        <span th:case="0" th:text="'xác nhận thành công'"></span>
+        <span th:case="1" th:text="'xác nhận thất bại'"></span>
+        <span th:case="2" th:text="'đã lưu trữ (vui lòng đợi xác nhận)'"></span>
+</div>
     </p>
 
     <p>
         <input type="hidden" th:field="*{media.permission}">
     </p>
-
     <button type="submit">Submit</button>
 
 </form>
-<table>
+
+<table border="2">
     <th>STT</th>
     <th>phòng</th>
     <th>tên phòng</th>
@@ -94,18 +97,28 @@
     <th>số lượng người tối đa</th>
     <th>trạng thái</th>
     <th>địa chỉ</th>
-    <tr th:each=" l,iterStat : ${list}">
+    <th>action</th>
+    <tr th:each=" l,iterStat : ${list}" >
         <td th:text="${iterStat.count}"></td>
         <td><img th:src="${l.m.url}" style="width: 200px; height: 200px; object-fit: cover;"></td>
         <td th:text="${l.l.title}"></td>
         <td th:text="${l.l.description}"></td>
         <td th:text="${l.l.price}"></td>
         <td th:text="${l.l.capacity}"></td>
-        <td th:text="${l.l.status}"></td>
+        <td th:switch="${l.l.status}">
+            <span th:case="1">còn trống</span>
+            <span th:case="2">đã có người cọc</span>
+            <span th:case="3">đã đủ người</span>
+            <span th:case="*">không xác định</span>
+        </td>
         <td th:text="${l.l.address}"></td>
-        <td><a th:href="@{/businessListings/updateRoom(id = l.l.id,id2=l.m.id)}">
+        <td><a th:href="@{/businessListings/updateRoom(id = ${l.id})}">
             <button>update</button>
-        </a></td>
+        </a>
+            <a th:href="@{/businessListings/deleteRoom(id = ${l.id})}">
+                <button>delete</button>
+            </a>
+        </td>
     </tr>
 </table>
 </body>
